@@ -88,3 +88,10 @@
 2026-02-07T15:53:03.867Z [DEBUG] [Lingo.dev] Reloaded metadata: 6 entries
 2026-02-07T15:53:03.867Z [INFO] [Lingo.dev] Translating all 6 entries to ar
 2026-02-07T15:53:10.859Z [INFO] [Lingo.dev] Translation server stopped
+2026-02-07T16:20:23.570Z [INFO] [Lingo.dev] 🔧 Initializing translator...
+2026-02-07T16:20:23.575Z [DEBUG] [Lingo.dev] Starting translation server on port 60000
+2026-02-07T16:20:23.577Z [INFO] [Lingo.dev] Translation server listening on http://127.0.0.1:60000
+2026-02-07T16:20:23.582Z [INFO] [Lingo.dev] WebSocket server initialized
+2026-02-07T16:20:23.583Z [DEBUG] [Lingo.dev] Reloaded metadata: 47 entries
+2026-02-07T16:20:23.583Z [INFO] [Lingo.dev] Translating all 47 entries to ar
+2026-02-07T16:20:43.168Z [INFO] [Lingo.dev] Translation server stopped
