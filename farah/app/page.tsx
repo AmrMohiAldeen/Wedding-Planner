@@ -1,4 +1,4 @@
-import { FarahApp } from "./farah-airbnb";
+import { FarahApp } from "./farah-airbnb-3";
 
 export default function Home() {
   return (
