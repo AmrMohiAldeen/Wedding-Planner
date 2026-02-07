@@ -1,48 +1,175 @@
-Emirati weddings are genuinely one of the most stressful, expensive, and chaotic experiences in UAE life. Let me paint the picture:
-The problem is real:
-An Emirati wedding typically involves a men's celebration and a separate women's celebration, often on different days at different venues. You're coordinating 15-30+ vendors — venue, catering (often multiple caterers for different courses), oud/bakhoor suppliers, traditional performers (harbiya, yolah), henna artists, photographers (separate for men's and women's sides due to privacy), florists, lighting, abaya/thobe tailors, gold/jewelry, invitation cards, valet parking, security. Budgets range from 200K-1M+ AED.
-Right now this is managed through:
+README.txt — Farah (فرح) | Emirati Wedding Orchestration + Multilingual Vendor Hub
+================================================================================
 
-WhatsApp groups with 40+ contacts
-The bride's mother calling people for hours daily
-Word of mouth recommendations with zero verification
-Vendors ghosting, double-booking, or inflating prices because they know it's a wedding
-Miscommunication with vendors who speak different languages
-Zero centralized tracking of what's been booked, paid, or confirmed
+Tagline
+-------
+“Your bilingual wedding planner, built for Emirati weddings.”
 
-There's no "Emirati wedding planner app" — existing platforms are Western-style and don't understand the cultural structure at all.
-How all 5 tools become essential:
-Crustdata → Vendor verification and discovery. Pull live data on event companies — are they actually registered? How many employees? Growing or dying? Any negative signals? This is the trust layer. "This catering company was founded 6 months ago and has 2 employees" vs "This one has been operating 8 years with 45 staff." Also surfaces new vendors you wouldn't find through word of mouth.
-Uplift AI → Voice communication with vendors. The bride's mother speaks Arabic. The florist's team speaks Hindi. The lighting company's crew speaks Tagalog. Instead of miscommunication over WhatsApp text, she leaves a voice note in Arabic — "I want the white orchid arrangement we discussed but bigger" — and the florist hears it in Hindi. This alone saves hours of frustration.
-Lingo.dev → Translates all written communication — contracts, invoices, menu options, design mood boards with text — between Arabic and vendor languages. Also localizes the entire app interface so vendors can use it in their own language.
-Trace → This is the brain. Orchestrates the entire wedding timeline:
+What Farah Is
+-------------
+Farah is a hackathon MVP that coordinates Emirati weddings end-to-end across:
+- Two celebrations (men’s + women’s), often different days/venues
+- 15–30+ vendors
+- Multiple languages (Arabic + Hindi/Tagalog/English/etc.)
+- High budgets + high risk (ghosting, double-booking, price inflation, confusion)
 
-6 months out: AI sends venue inquiry to top 5 verified venues
-4 months out: auto-follows up on catering tastings
-2 weeks out: confirms every single vendor, sends day-of schedule
-AI handles routine coordination (confirming times, sending directions, collecting invoices)
-Routes decisions to the human: "3 photographers responded, here are their portfolios and prices — pick one"
-Flags problems: "Your henna artist hasn't confirmed for tomorrow, here's a backup"
+Farah combines:
+1) Verified vendor discovery (trust layer)
+2) Voice + text translation for coordination
+3) A timeline brain that automates follow-ups + confirmations
+4) Call transcripts + action items so nothing is forgotten
 
-Lyra → Vendor consultation calls. When you need to discuss the menu in detail with the caterer or walk through the venue layout — Lyra hosts the call, transcribes it, and extracts action items. "Caterer confirmed 300 guests, lamb machboos + chicken madrooba, delivery at 6pm, setup crew arrives at 4pm." No more "wait what did we agree on?"
-The demo (2 hours):
-Show a bride starting her planning — she speaks in Arabic: "I need a caterer for 300 guests, women's side, traditional Emirati food, budget 50,000 dirhams." The agent:
+Core Pain Points
+----------------
+- WhatsApp chaos, scattered invoices, unclear confirmations
+- Language barriers between family and vendor teams
+- No centralized tracking: booked/paid/confirmed/status
+- Vendor reliability unknown; price inflation common in weddings
 
-Pulls verified catering companies from Crustdata
-Ranks them by reliability signals
-Sends inquiry messages translated into each vendor's language via Lingo.dev
-Schedules a tasting call via Lyra
-Adds it to the wedding timeline managed by Trace
-When the Hindi-speaking caterer responds with a voice note, Uplift converts it to Arabic for the bride
+MVP Features (Hackathon Scope)
+------------------------------
+Bride/Planner flow:
+- “Plan my wedding” intake (Arabic prompt)
+- Vendor search (category, budget, side: men/women, guest count)
+- Vendor reliability score + verification signals
+- One-click inquiry to top vendors in their language
+- Auto-generated wedding timeline with tasks + follow-ups
+- Vendor responses unified: text + voice translated back to Arabic
+- Call summary: transcript + action items + commitments
 
-All in one flow. The whole thing feels like having a bilingual wedding planner working 24/7.
-Why it wins:
+Vendor flow (minimal):
+- Receive inquiry in preferred language
+- Reply by voice/text
+- Confirm availability + price
+- Upload invoice/terms (optional)
 
-Every Emirati family relates — weddings happen constantly and everyone has horror stories
-It respects cultural specifics (gender-separated events, traditional elements) that no existing tool handles
-The multilingual bridge is the core feature, not a bolt-on
-VCs see a massive market: 30,000+ Emirati weddings per year, average spend well into six figures
-It extends naturally to all events — national day celebrations, Ramadan gatherings, graduation parties
+How The 5 Tools Map In (Integrations)
+-------------------------------------
+1) Crustdata (Trust + Discovery)
+   - Pull vendor company signals (registration, age, size, growth indicators)
+   - Compute a “Reliability Score” for ranking
 
-What would you call it? Something like "Farha" (فرحة — joy/celebration) or "Arees" (عريس — groom)?
-Want me to map out the technical architecture and a build plan for the 2-hour sprint?
+2) Uplift AI (Voice Translation)
+   - Bride voice note in Arabic -> vendor hears in their language
+   - Vendor voice reply -> bride receives Arabic version
+
+3) Lingo.dev (Text Translation + Localization)
+   - Translate contracts, invoices, menus, mood boards text
+   - App UI localization (hackathon: Arabic + English + one vendor language)
+
+4) Trace (Timeline Brain / Orchestration)
+   - Generate a planning timeline (6 months -> day-of)
+   - Send automated follow-ups + confirmations
+   - Escalate decisions to human (“pick 1 of these 3 photographers”)
+
+5) Lyra (Consultation Calls)
+   - Host call / transcribe / extract action items
+   - Push commitments into timeline + vendor status
+
+Architecture (Hackathon-Friendly)
+---------------------------------
+[Web App] (Next.js)
+   |
+   v
+[API Server] (Node/Express)
+   |-- Vendor Adapter (Crustdata or mocked)
+   |-- Translation Adapter (Lingo.dev or mocked)
+   |-- Voice Adapter (Uplift AI or mocked)
+   |-- Orchestrator (Trace or simplified internal workflow)
+   |-- Call Notes Adapter (Lyra or mocked)
+   |
+   v
+[DB] (Postgres or SQLite for hackathon)
+
+Suggested Tech Stack
+--------------------
+Frontend: Next.js + Tailwind
+Backend: Node.js (Express) or Next.js API routes
+DB: SQLite (fast) or Postgres
+Auth: optional (single demo user)
+Queue: optional (in-memory job runner for follow-ups)
+
+Repo Structure (Suggested)
+--------------------------
+/farah
+  /apps
+    /web                # UI (intake, vendors, timeline, messages)
+    /api                # API endpoints
+  /packages
+    /adapters           # crustdata, lingo, uplift, lyra, trace wrappers
+    /core               # scoring, timeline generation, schemas
+  /data
+    vendors.seed.json   # fallback dataset for demo
+  .env.example
+  README.txt
+
+Environment Variables (.env.example)
+------------------------------------
+CRUSTDATA_API_KEY=
+LINGO_API_KEY=
+UPLIFT_API_KEY=
+TRACE_API_KEY=
+LYRA_API_KEY=
+DATABASE_URL=
+
+Hackathon Mode (No Keys Needed)
+-------------------------------
+If API keys are missing, Farah runs in “mock mode”:
+- Crustdata -> seeded vendors list + simulated signals
+- Lingo.dev -> basic placeholder translation (or a lightweight translator)
+- Uplift -> simulated voice-to-text + “translated” response
+- Trace -> internal timeline generator + scheduled follow-ups (in-memory)
+- Lyra -> simulated call summary from typed notes
+
+Local Setup (Example)
+---------------------
+1) Install deps
+   - npm install
+
+2) Configure
+   - cp .env.example .env
+
+3) Run
+   - npm run dev
+
+Demo Script (2–3 minutes)
+--------------------------
+1) Bride speaks (Arabic): “I need a caterer for 300 guests, women’s side, traditional food, budget 50,000 AED.”
+2) Farah returns verified caterers ranked by reliability (trust signals).
+3) Click “Send inquiries”:
+   - Farah sends vendor messages translated to vendor language (text).
+4) Vendor responds with voice note (Hindi):
+   - Farah shows Arabic translation + extracted price/availability.
+5) Bride schedules tasting call:
+   - Lyra generates call summary + action items.
+6) Timeline updates automatically (Trace):
+   - “Tasting scheduled”, “Invoice pending”, “Confirm 2 weeks before event”.
+
+Success Criteria (Hackathon)
+----------------------------
+- End-to-end flow works in one session:
+  intake -> vendor list -> inquiry -> translated response -> timeline update
+- Demonstrates cultural structure (men/women sides)
+- Demonstrates multilingual bridge (voice or text)
+- Shows trust scoring and verification layer
+
+Out of Scope (Hackathon)
+------------------------
+- Real payments
+- Full vendor onboarding portal
+- Legal contract signing
+- Complex multi-event guest management
+- Production-grade privacy controls (not ignored; just not fully built)
+
+Privacy Notes (Important)
+-------------------------
+- Women’s event content is sensitive: no photo sharing by default.
+- Vendor access should be least-privilege.
+- Store minimal data for demo; redact audio/transcripts when possible.
+
+Future Extensions
+-----------------
+- Price benchmarking + negotiation assistant
+- “Backup vendor” auto-sourcing if confirmation fails
+- Full event types: Ramadan gatherings, graduations, National Day events
+- Family roles: bride’s mother dashboard, groom’s side dashboard
